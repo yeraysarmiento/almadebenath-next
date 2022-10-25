@@ -35,7 +35,7 @@ export const getImages = async (id) => {
 export const getAlbums = async () => {
   const { data } = await axios.get(`${BASE_URL}/posts?_embed`);
   const albums = await shapeAlbums(data);
-  return albums;
+  return albums.filter((album) => album.title !== "_about");
 };
 
 export const getCategories = async (id) => {
@@ -47,6 +47,13 @@ export const getCategories = async (id) => {
 export const getAlbum = async (slug) => {
   const { data } = await axios.get(`${BASE_URL}/posts?_embed&slug=${slug}`);
   return data[0];
+};
+
+export const getAbout = async () => {
+  const { data: about } = await axios.get(
+    `${BASE_URL}/posts?_embed&slug=about&_fields=acf&acf_format=standard`
+  );
+  return about[0].acf;
 };
 
 export const getPaths = async () => {
