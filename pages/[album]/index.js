@@ -28,7 +28,7 @@ export default function Album({ album }) {
 
 export async function getStaticPaths() {
   const paths = await getSlugs();
-
+  console.log(paths);
   return {
     paths,
     fallback: "blocking",
