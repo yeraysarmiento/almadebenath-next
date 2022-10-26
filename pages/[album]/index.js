@@ -1,18 +1,19 @@
 import Image from "next/image";
-import { getAlbum, getPaths, shapeAlbum } from "../../utils/wordpress";
+import { useEffect, useState } from "react";
+import { getAlbum, getPaths, getSlugs, shapeAlbum } from "../../utils/wordpress";
 
 export default function Album({ album }) {
+  const [isDetail, setIsDetail] = useState(false);
+
+  useEffect(() => {
+    return () => setIsDetail(false);
+  });
+
   return (
     <>
       <h1>{album.title}</h1>
       {album.images?.map((image, i) => (
-        <Image
-          key={i}
-          src={image}
-          width="200"
-          height="200"
-          alt="Picture of alma"
-        />
+        <Image key={i} src={image} width="200" height="200" alt="Picture of alma" />
       ))}
       <style jsx>
         {`
@@ -26,7 +27,7 @@ export default function Album({ album }) {
 }
 
 export async function getStaticPaths() {
-  const paths = await getPaths();
+  const paths = await getSlugs();
 
   return {
     paths,
