@@ -5,30 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Home({ albums }) {
-  const { setAlbums } = useContext(AppContext);
+  // const { theme, setTheme, } = useContext(AppContext);
 
-  useEffect(() => {
-    setAlbums(albums);
-  }, [albums, setAlbums]);
-  console.log(albums);
+  // useEffect(() => {
+  //   setAlbums(albums);
+  // }, [albums, setAlbums]);
 
-  const album = albums[5];
-
-  return (
-    <div>
-      <Link href="/essentials">ALBUM</Link>
-
-      <h1>home</h1>
-
-      <style jsx>
-        {`
-          h1 {
-            color: orange;
-          }
-        `}
-      </style>
-    </div>
-  );
+  return <h1>home</h1>;
 }
 
 export async function getStaticProps() {

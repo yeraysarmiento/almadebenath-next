@@ -1,32 +1,58 @@
 import Head from "next/head";
-import { useState } from "react";
-import "../styles/globals.css";
+import { useEffect, useState } from "react";
+import "../styles/globals.scss";
 import { createContext } from "react";
+import { useRouter } from "next/router";
+import { getCategories, getPaths } from "../utils/wordpress";
+import Header from "../components/Header/Header";
+import Menu from "../components/Menu/Menu";
 
 export const AppContext = createContext();
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+
+  const [paths, setPaths] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [theme, setTheme] = useState("");
-  const [albums, setAlbums] = useState([]);
+
+  const getMenuPaths = async () => {
+    const paths = await getPaths();
+    setPaths(paths);
+  };
+
+  const getCategoriesList = async () => {
+    const categories = await getCategories();
+    setCategories(categories);
+  };
+
+  useEffect(() => {
+    getMenuPaths();
+    getCategoriesList();
+  }, [router]);
 
   const state = {
+    paths,
+    categories,
+    setCategories,
+    isOpenMenu,
+    setIsOpenMenu,
     theme,
     setTheme,
-    albums,
-    setAlbums,
   };
 
   return (
     <AppContext.Provider value={state}>
       <Head>
         <title>Alma Debenath</title>
-        <meta
-          name="description"
-          content="Page for Alma Debenath, a professional photographer"
-        />
-        <link rel="icon" href="/favicon.svg" />
+        <meta name="description" content="Page for Alma Debenath, a professional photographer" />
+        <link rel="icon" href="./img/favicon.svg" />
       </Head>
-      <Component {...pageProps} />
+      <Menu paths={paths} categories={categories} />
+      <section style={{ paddingTop: "80px", height: "100vh" }}>
+        <Component {...pageProps} />
+      </section>
     </AppContext.Provider>
   );
 }
