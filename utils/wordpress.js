@@ -26,9 +26,7 @@ export const shapeAlbum = async (album) => {
 };
 
 export const getImages = async (id) => {
-  const { data: images } = await axios.get(
-    `${BASE_URL}/media?parent=${id}&per_page=50`
-  );
+  const { data: images } = await axios.get(`${BASE_URL}/media?parent=${id}&per_page=50`);
   return images.map((image) => image.source_url);
 };
 
@@ -50,21 +48,29 @@ export const getAlbum = async (slug) => {
 };
 
 export const getAbout = async () => {
-  const { data: about } = await axios.get(
-    `${BASE_URL}/posts?_embed&slug=about&_fields=acf&acf_format=standard`
-  );
+  const { data: about } = await axios.get(`${BASE_URL}/posts?_embed&slug=about&_fields=acf&acf_format=standard`);
   return about[0].acf;
 };
 
-export const getPaths = async () => {
+export const getSlugs = async () => {
   const { data: albums } = await axios.get(`${BASE_URL}/posts`);
-  const paths = albums.map((album) => {
+  const slugs = albums.map((album) => {
     return {
       params: {
         album: album.slug,
       },
     };
   });
+
+  return slugs;
+};
+
+export const getPaths = async () => {
+  const { data: albums } = await axios.get(`${BASE_URL}/posts?_embed`);
+  const paths = albums.map((album) => ({
+    path: album.slug,
+    categorie: album["_embedded"]["wp:term"][0][0].slug,
+  }));
 
   return paths;
 };
