@@ -54,13 +54,20 @@ export const getAbout = async () => {
 
 export const getSlugs = async () => {
   const { data: albums } = await axios.get(`${BASE_URL}/posts`);
-  const slugs = albums.map((album) => {
-    return {
-      params: {
-        album: album.slug,
-      },
-    };
-  });
+  const slugs = albums.reduce(
+    (acc, album) =>
+      album.slug === "about"
+        ? acc
+        : [
+            ...acc,
+            {
+              params: {
+                album: album.slug,
+              },
+            },
+          ],
+    []
+  );
 
   return slugs;
 };
