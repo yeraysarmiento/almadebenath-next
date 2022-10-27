@@ -7,7 +7,7 @@ export default function About({ about }) {
 
   return (
     <>
-      <article className="about-container">
+      <div className="about-container">
         <div className="about-box">
           <ul className="social">
             <li className="social__phone">{phone}</li>
@@ -19,19 +19,77 @@ export default function About({ about }) {
             </li>
           </ul>
           <p className="description">{description}</p>
-          <Image
-            className="portrait"
-            src={profile.url}
-            alt="Portrait of Alma Debenath"
-            width="200"
-            height="300"
-          />
+          <div className="portrait-container">
+            <Image
+              className="portrait"
+              src={profile.url}
+              alt="Portrait of Alma Debenath"
+              width="500"
+              height="700"
+              objectFit="cover"
+            />
+          </div>
         </div>
         <div className="logo">
-          <Image src={logo} alt="logo of alma debenath" />
+          <Image src={logo} alt="logo of alma debenath" width="200" />
         </div>
-      </article>
-      <style jsx>{``}</style>
+      </div>
+      <style jsx>{`
+        .about-container {
+          padding: 20px;
+          padding-top: 80px;
+          font-size: 16px;
+          background-color: #dfc576;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .portrait-container {
+          object-fit: cover;
+          max-width: 50%;
+        }
+
+        .about-box {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+        }
+
+        .description {
+          margin-bottom: 50px;
+          line-height: 21px;
+        }
+
+        .social {
+          margin-bottom: 30px;
+        }
+
+        .social li {
+          margin: 5px 0;
+        }
+
+        .social__instagram {
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
+
+        .logo {
+          margin-top: 20px;
+          height: 80px;
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        @media only screen and (min-width: 600px) {
+          .about-container {
+            height: 100vh;
+          }
+
+          .logo {
+            margin-top: 50px;
+          }
+        }
+      `}</style>
     </>
   );
 }
