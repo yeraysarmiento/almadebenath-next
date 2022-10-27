@@ -43,7 +43,7 @@ export default function Album({ album }) {
           ))}
         </ul>
       </main>
-      {isOpenModal && <Detail detail={detail} setIsOpenModal={setIsOpenModal} onMove={onMove} />}
+      {isOpenModal && <Detail detail={detail} setIsOpenModal={setIsOpenModal} onMove={onMove} images={images} />}
       <style jsx>{`
         .gallery {
           display: grid;

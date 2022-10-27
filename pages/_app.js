@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="./img/favicon.svg" />
       </Head>
       <Menu paths={paths} categories={categories} />
-      <section style={{ height: "100vh" }}>
+      <section style={{ height: "100vh", overflowY: "hidden" }}>
         <Component {...pageProps} />
       </section>
     </AppContext.Provider>

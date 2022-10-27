@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { useMemo } from "react";
 import arrowIcon from "../../img/icons/arrow.svg";
 import closeIcon from "../../img/icons/close.svg";
 
-const Detail = ({ detail, setIsOpenModal, onMove }) => {
+const Detail = ({ detail, setIsOpenModal, onMove, images }) => {
   setTimeout(() => {
     document.getElementById("detail")?.focus();
   }, 100);
@@ -11,6 +12,9 @@ const Detail = ({ detail, setIsOpenModal, onMove }) => {
     if (event.keyCode === 39) onMove(1);
     if (event.keyCode === 37) onMove(-1);
   };
+
+  const isFirstPicture = useMemo(() => images.indexOf(detail) === 0, [detail, images]);
+  const isLastPicture = useMemo(() => images.indexOf(detail) === images.length - 1, [detail, images]);
 
   return (
     <>
@@ -25,7 +29,7 @@ const Detail = ({ detail, setIsOpenModal, onMove }) => {
                 height="800"
                 width="800"
                 objectFit="contain"
-                style={{ zIndex: 99, pointerEvents: "none", display: "flex" }}
+                style={{ zIndex: 99, pointerEvents: "none" }}
               />
             </div>
           </div>
@@ -35,7 +39,11 @@ const Detail = ({ detail, setIsOpenModal, onMove }) => {
               alt="left arrow icon"
               width="30"
               onClick={() => onMove(-1)}
-              style={{ transform: "rotate(180deg)", cursor: "pointer" }}
+              style={{
+                transform: "rotate(180deg)",
+                cursor: "pointer",
+                visibility: isFirstPicture ? "hidden" : "visible",
+              }}
             />
             <Image
               src={closeIcon}
@@ -50,6 +58,7 @@ const Detail = ({ detail, setIsOpenModal, onMove }) => {
               onClick={() => onMove(+1)}
               style={{
                 cursor: "pointer",
+                visibility: isLastPicture ? "hidden" : "visible",
               }}
             />
           </div>
@@ -70,7 +79,7 @@ const Detail = ({ detail, setIsOpenModal, onMove }) => {
           }
 
           .detail {
-            height: calc(100% - 100px);
+            height: calc(100% - 80px);
             width: 100%;
             z-index: 2;
           }
