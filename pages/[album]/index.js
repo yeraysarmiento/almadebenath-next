@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getAlbum, getPaths, getSlugs, shapeAlbum } from "../../utils/wordpress";
+import { AppContext } from "../_app";
 
 export default function Album({ album }) {
   const [isDetail, setIsDetail] = useState(false);
@@ -28,7 +29,6 @@ export default function Album({ album }) {
 
 export async function getStaticPaths() {
   const paths = await getSlugs();
-  console.log(paths);
   return {
     paths,
     fallback: "blocking",

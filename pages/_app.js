@@ -34,6 +34,7 @@ function MyApp({ Component, pageProps }) {
 
   const state = {
     paths,
+    setPaths,
     categories,
     setCategories,
     isOpenMenu,
@@ -50,7 +51,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="./img/favicon.svg" />
       </Head>
       <Menu paths={paths} categories={categories} />
-      <section style={{ paddingTop: "80px", height: "100vh" }}>
+      <section style={{ height: "100vh" }}>
         <Component {...pageProps} />
       </section>
     </AppContext.Provider>
