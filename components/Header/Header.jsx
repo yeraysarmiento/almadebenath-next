@@ -23,7 +23,6 @@ const Header = () => {
       <style jsx>
         {`
           header {
-            font-family: Futura;
             width: 100%;
             padding: 25px;
             height: 80px;
@@ -36,7 +35,6 @@ const Header = () => {
           h1 {
             cursor: pointer;
             font-family: Karla;
-            font-weight: 500;
             font-size: 22px;
             display: flex;
             align-items: center;
