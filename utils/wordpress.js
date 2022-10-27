@@ -74,10 +74,12 @@ export const getSlugs = async () => {
 
 export const getPaths = async () => {
   const { data: albums } = await axios.get(`${BASE_URL}/posts?_embed`);
-  const paths = albums.map((album) => ({
-    path: album.slug,
-    categorie: album["_embedded"]["wp:term"][0][0].slug,
-  }));
+  const paths = albums
+    .map((album) => ({
+      path: album.slug,
+      categorie: album["_embedded"]["wp:term"][0][0].slug,
+    }))
+    .filter((album) => album.categorie !== "uncategorized");
 
   return paths;
 };

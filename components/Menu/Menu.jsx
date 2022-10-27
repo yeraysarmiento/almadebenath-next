@@ -8,14 +8,14 @@ import Switch from "../Switch/Switch";
 export const Menu = ({ paths, categories }) => {
   const { theme, setTheme, isOpenMenu, setIsOpenMenu } = useContext(AppContext);
   const router = useRouter();
-  const pathname = router.query.album;
+  const pathname = router.asPath;
 
   const [routes, setRoutes] = useState([]);
 
   //Sets theme acording to pathname
   useEffect(() => {
-    const matchedPath = paths.find(({ path }) => path === pathname);
-    paths.length && setTheme(matchedPath.categorie);
+    const matchedPath = paths.find(({ path }) => pathname.includes(path));
+    paths.length && setTheme(matchedPath?.categorie || categories[1]);
   }, [paths.length]);
 
   //Sets routes according to theme
@@ -42,6 +42,16 @@ export const Menu = ({ paths, categories }) => {
               </li>
             </Link>
           ))}
+          <Link href="/about">
+            <h2
+              className={
+                "menu__element menu__element--about" + (pathname.includes("about") ? " menu__element--on" : "")
+              }
+              onClick={() => setIsOpenMenu(false)}
+            >
+              about
+            </h2>
+          </Link>
         </ul>
         <Switch setRoutes={setRoutes} />
       </section>
@@ -111,7 +121,6 @@ export const Menu = ({ paths, categories }) => {
 
           .menu__element--about {
             font-weight: lighter;
-            // margin-bottom: 71px;
             padding: 30px 0;
           }
         `}

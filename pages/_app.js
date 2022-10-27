@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }) {
   const [paths, setPaths] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [theme, setTheme] = useState("");
 
   const getMenuPaths = async () => {
@@ -34,12 +35,15 @@ function MyApp({ Component, pageProps }) {
 
   const state = {
     paths,
+    setPaths,
     categories,
     setCategories,
     isOpenMenu,
     setIsOpenMenu,
     theme,
     setTheme,
+    isOpenModal,
+    setIsOpenModal,
   };
 
   return (
@@ -50,7 +54,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="./img/favicon.svg" />
       </Head>
       <Menu paths={paths} categories={categories} />
-      <section style={{ paddingTop: "80px", height: "100vh" }}>
+      <section style={{ height: "100vh" }}>
         <Component {...pageProps} />
       </section>
     </AppContext.Provider>
