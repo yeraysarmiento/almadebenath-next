@@ -23,6 +23,7 @@ const Header = () => {
       <style jsx>
         {`
           header {
+            font-family: Futura;
             width: 100%;
             padding: 25px;
             height: 80px;
