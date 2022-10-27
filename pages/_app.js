@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { getCategories, getPaths } from "../utils/wordpress";
 import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
+import "@fontsource/karla";
 
 export const AppContext = createContext();
 
