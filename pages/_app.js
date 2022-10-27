@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }) {
   const [paths, setPaths] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [theme, setTheme] = useState("");
 
   const getMenuPaths = async () => {
@@ -41,6 +42,8 @@ function MyApp({ Component, pageProps }) {
     setIsOpenMenu,
     theme,
     setTheme,
+    isOpenModal,
+    setIsOpenModal,
   };
 
   return (

@@ -2,12 +2,20 @@ import { useContext } from "react";
 import { AppContext } from "../../pages/_app";
 
 const Burger = () => {
-  const { isOpenMenu, setIsOpenMenu } = useContext(AppContext);
+  const { isOpenMenu, setIsOpenMenu, setIsOpenModal } = useContext(AppContext);
 
   return (
     <>
       <div className="burger-container">
-        <div className="burger" onClick={() => setIsOpenMenu((prev) => !prev)}>
+        <div
+          className="burger"
+          onClick={() => {
+            setIsOpenMenu((prev) => !prev);
+            setTimeout(() => {
+              setIsOpenModal(false);
+            }, 300);
+          }}
+        >
           <div className={"burger__layer" + (isOpenMenu ? " burger__layer--top" : "")}></div>
           <div className={"burger__layer" + (isOpenMenu ? " burger__layer--bottom" : "")}></div>
         </div>
