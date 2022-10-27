@@ -42,17 +42,15 @@ export const Menu = ({ paths, categories }) => {
               </li>
             </Link>
           ))}
-          <Link href="/about">
-            <h2
-              className={
-                "menu__element menu__element--about" + (pathname.includes("about") ? " menu__element--on" : "")
-              }
-              onClick={() => setIsOpenMenu(false)}
-            >
-              about
-            </h2>
-          </Link>
         </ul>
+        <Link href="/about">
+          <h2
+            className={"menu__element menu__element--about" + (pathname.includes("about") ? " menu__element--on" : "")}
+            onClick={() => setIsOpenMenu(false)}
+          >
+            about
+          </h2>
+        </Link>
         <Switch setRoutes={setRoutes} />
       </section>
       <style jsx>
