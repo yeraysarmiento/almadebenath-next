@@ -68,8 +68,6 @@ const Detail = ({ detail, setIsOpenModal, onMove, images }) => {
         {`
           .detail-container {
             position: fixed;
-            height: 100vh;
-            width: 100vw;
             top: 0;
             bottom: 0;
             display: flex;
