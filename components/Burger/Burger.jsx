@@ -13,7 +13,7 @@ const Burger = () => {
             setIsOpenMenu((prev) => !prev);
             setTimeout(() => {
               setIsOpenModal(false);
-            }, 300);
+            }, 500);
           }}
         >
           <div className={"burger__layer" + (isOpenMenu ? " burger__layer--top" : "")}></div>
